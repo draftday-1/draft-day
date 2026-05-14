@@ -1,0 +1,30 @@
+workflows:
+  ios-workflow:
+    name: Draft Day iOS
+    max_build_duration: 60
+    environment:
+      xcode: latest
+      node: 18
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.draftday.app
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Install Capacitor CLI
+        script: |
+          npm install -g @capacitor/cli
+      - name: Add iOS platform
+        script: |
+          npx cap add ios || true
+          npx cap copy ios
+      - name: Install CocoaPods
+        script: |
+          cd ios/App && pod install
+    artifacts:
+      - ios/App/build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

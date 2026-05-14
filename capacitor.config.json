@@ -1,0 +1,9 @@
+{
+  "appId": "com.draftday.app",
+  "appName": "Draft Day",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "ios": {
+    "contentInset": "always"
+  }
+}
